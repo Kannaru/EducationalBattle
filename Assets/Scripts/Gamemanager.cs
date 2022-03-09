@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Gamemanager : MonoBehaviour
 {
+    public bool gameActive = true;
+    public bool bossInGame;
+    
+    public GameObject Boss;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +17,11 @@ public class Gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Spawn in the enemy
+        if (gameActive && bossInGame == false)
+        {
+            Instantiate(Boss);
+            bossInGame = true;
+        }
     }
 }

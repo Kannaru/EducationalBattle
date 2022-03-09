@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    public bool isFire = false;
+    public float TimebetweenBullets;
+    public float attackSpeed;
+    public float bulletspeed;
+    
     public GameObject bulletPrefab;
+    public BulletController Bullet;
+    public Transform firePoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,11 +20,21 @@ public class PlayerShoot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            
+    void Update() {
+        if (Input.GetMouseButtonDown(0)) {
+           isFire = true;
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            isFire = false;
+        }
+        
+        if (isFire) {
+            attackSpeed -= Time.deltaTime;
+            if (attackSpeed <= 0) {
+                attackSpeed = TimebetweenBullets;
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            }
         }
     }
 }
