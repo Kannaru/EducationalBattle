@@ -22,5 +22,6 @@ public class EnemyController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         rb.isKinematic = true;
+        
     }
 }
