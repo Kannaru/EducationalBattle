@@ -8,10 +8,15 @@ public class Gamemanager : MonoBehaviour
     public bool bossInGame;
     
     public GameObject Boss;
+
+    public int health;
+    public int Bosshealth;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = 5;
+        Bosshealth = 20;
     }
 
     // Update is called once per frame
@@ -20,7 +25,7 @@ public class Gamemanager : MonoBehaviour
         //Spawn in the enemy
         if (gameActive && bossInGame == false)
         {
-            Instantiate(Boss);
+            Instantiate(Boss, new Vector3(0,50,200), Quaternion.identity);
             bossInGame = true;
         }
     }

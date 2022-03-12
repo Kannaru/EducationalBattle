@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947543051492583808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.158, y: 0.306, z: 0.511}
+  m_LocalPosition: {x: -0.158, y: 0.306, z: -0.503}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5172520059792581618}
@@ -109,7 +109,9 @@ GameObject:
   - component: {fileID: 5172520059792581623}
   - component: {fileID: 5172520059792581613}
   - component: {fileID: 5172520059792581612}
+  - component: {fileID: -6545622953839332045}
   - component: {fileID: 5172520059792581619}
+  - component: {fileID: -6798951287180491740}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -131,6 +133,7 @@ Transform:
   - {fileID: 4968862272643376673}
   - {fileID: 559075519519419055}
   - {fileID: 9088571671848191850}
+  - {fileID: 3033193238371117526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -225,9 +228,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be62010d5040b74b919e7e26c586460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bullets: {fileID: 8530944660592182041, guid: b18eb935ffc33e848b3ba0641014a136, type: 3}
+  RandomLocation: {fileID: 0}
+  Shootingpoint: {fileID: 3033193238371117526}
   Bullet: {fileID: 8530944660592182041, guid: b18eb935ffc33e848b3ba0641014a136, type: 3}
-  fireRate: 0
-  nextFire: 0
+  attack1: 1
+  fireRateAttack1: 1
+  nextFireAttack1: 0
+  attack2: 0
+  fireRateAttack2: 0.1
+  nextFireAttack2: 0
+  attack3: 0
+  fireRateAttack3: 0.5
+  nextFireAttack3: 0
+--- !u!114 &-6545622953839332045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172520059792581622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1149ea385a23f4281926dd451b92bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5172520059792581619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +266,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5172520059792581613}
+--- !u!114 &-6798951287180491740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172520059792581622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce3b9e11674d7048abfa372ba8df8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 20
+  alsospeed: 20
+  changeAttack: 0
+  attackPattern: {fileID: 5172520059792581622}
 --- !u!1 &5417368790307378488
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5417368790307378488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.143, y: 0.306, z: 0.52}
+  m_LocalPosition: {x: 0.143, y: 0.306, z: -0.503}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5172520059792581618}
@@ -336,6 +377,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7695042543237349921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3033193238371117526}
+  m_Layer: 0
+  m_Name: EnemyBulletSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3033193238371117526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695042543237349921}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.001, y: -0.87, z: -0.66}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_Children: []
+  m_Father: {fileID: 5172520059792581618}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9080490608416646837
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +434,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080490608416646837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.003, y: -0.105, z: 0.511}
+  m_LocalPosition: {x: -0.003, y: -0.105, z: -0.503}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5172520059792581618}

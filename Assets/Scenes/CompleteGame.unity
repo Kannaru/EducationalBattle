@@ -395,7 +395,7 @@ Transform:
   m_LocalScale: {x: 50, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0.47, z: 0}
 --- !u!65 &1801851599
 BoxCollider:
@@ -472,6 +472,8 @@ MonoBehaviour:
   gameActive: 1
   bossInGame: 0
   Boss: {fileID: 5172520059792581622, guid: d41c0552921375b4eb16c5842bee9dc6, type: 3}
+  health: 0
+  Bosshealth: 0
 --- !u!1001 &6795780530423103402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -479,9 +481,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6795780532190201361, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795780532309686088, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795780532309686088, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795780532309686089, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
+      propertyPath: Gamemanager
+      value: 
+      objectReference: {fileID: 2051154647}
+    - target: {fileID: 6795780532309686089, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
+      propertyPath: RotationSpeed
+      value: 550
+      objectReference: {fileID: 0}
     - target: {fileID: 6795780532309686091, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6795780532309686091, guid: 2e7b942a51aef2047bf22d58b7dd887a, type: 3}
       propertyPath: m_LocalPosition.x

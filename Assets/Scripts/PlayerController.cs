@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,20 @@ public class PlayerController : MonoBehaviour
 {
     public float RotationSpeed = 450;
     public float speed;
+    public GameObject Gamemanager;
+    private Gamemanager gm;
+    
 
     public Quaternion targetRotation;
     public CharacterController controller;
     public PlayerShoot shooting;
-    
+
     public float dashCooldown;
     public bool onGround = true;
-    
+
     void Start()
     {
+        gm = Gamemanager.GetComponent<Gamemanager>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -38,7 +43,8 @@ public class PlayerController : MonoBehaviour
         controller.Move(motion * Time.deltaTime);
 
         //Dashing with the LeftShift key
-        if (Input.GetKeyDown(KeyCode.LeftShift)){
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
             speed = 200;
         }
 
@@ -46,23 +52,13 @@ public class PlayerController : MonoBehaviour
         {
             speed = 100;
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && onGround)
-        {
-            jump();
-        }
-
-        void jump()
-        {
-            gameObject.transform.Translate(0,50,0);
-            
-            onGround = false;
-        }
     }
-    
-    //WIP jump
-    private void OnCollisionEnter(Collision collision)
+
+    public void OnCollisionEnter(Collision collision)
     {
-        onGround = true;
+        if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            gm.health -= 1;
+        }
     }
 }
