@@ -6,22 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public float RotationSpeed = 450;
+    public float rotationSpeed = 450;
     public float speed;
-    public GameObject Gamemanager;
-    private Gamemanager gm;
-    
 
     public Quaternion targetRotation;
     public CharacterController controller;
-    public PlayerShoot shooting;
-
-    public float dashCooldown;
-    public bool onGround = true;
+    
 
     void Start()
     {
-        gm = Gamemanager.GetComponent<Gamemanager>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -34,7 +27,7 @@ public class PlayerController : MonoBehaviour
         {
             targetRotation = Quaternion.LookRotation(input);
             transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,
-                targetRotation.eulerAngles.y, RotationSpeed * Time.deltaTime);
+                targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
         }
 
         Vector3 motion = input;
@@ -58,7 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            gm.health -= 1;
+            Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
+             gm.health -= 1;
         }
     }
 }

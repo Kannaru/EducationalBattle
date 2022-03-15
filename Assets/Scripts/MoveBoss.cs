@@ -1,24 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MoveBoss : MonoBehaviour
 {
-    public int Speed = 20;
+    public int speed = 20;
 
-    public int alsospeed = 20;
+    public int alsoSpeed = 20;
 
     public int changeAttackNumber;
     public int whichAttack;
     public GameObject attackPattern;
-    private AttackPlayer1 Control;
+    private AttackPlayer1 _control;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        Control = attackPattern.GetComponent<AttackPlayer1>();
-        
-        
+        _control = attackPattern.GetComponent<AttackPlayer1>();
     }
 
     // Update is called once per frame
@@ -30,10 +30,14 @@ public class MoveBoss : MonoBehaviour
 
     }
 
+
+    
     private void UpdateMovement()
     {
-        Vector3 movement = new Vector3(Speed, 0, 0);
+        Vector3 movement = new Vector3(speed, 0, 0);
         transform.Translate(movement * 15 * Time.deltaTime);
+
+        
         if (transform.position.x < -200)
         {
             
@@ -49,13 +53,13 @@ public class MoveBoss : MonoBehaviour
     void MoveRight()
     {
         changeAttackNumber = Random.Range(1, 3);
-        Speed = 20;
+        speed = 20;
     }
 
     void MoveLeft()
     {
         changeAttackNumber = Random.Range(1, 3);
-        Speed = -20;
+        speed = -20;
     }
 
     void ChangeAttack()
@@ -68,26 +72,23 @@ public class MoveBoss : MonoBehaviour
 
         if (whichAttack == 1)
         {
-            Debug.Log("attack1");
-            Control.attack1 = true;
-            Control.attack2 = false;
-            Control.attack3 = false;
+            _control.attack1 = true;
+            _control.attack2 = false;
+            _control.attack3 = false;
         }
         else if (whichAttack == 2)
         {
-            Debug.Log("attack2");
-
-            Control.attack1 = false;
-            Control.attack2 = true;
-            Control.attack3 = false;
+            _control.attack1 = false;
+            _control.attack2 = true;
+            _control.attack3 = false;
         }
         else if (whichAttack == 3)
         {
-            Debug.Log("attack3");
-
-            Control.attack1 = false;
-            Control.attack2 = false;
-            Control.attack3 = true;
+            _control.attack1 = false;
+            _control.attack2 = false;
+            _control.attack3 = true;
         }
     }
 }
+
+

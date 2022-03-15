@@ -6,12 +6,12 @@ using UnityEngine.UIElements;
 
 public class AttackPlayer1 : MonoBehaviour
 { 
-    public GameObject Bullets;
-    private enemyBulletControllerAttack1 Control;
+    public GameObject bullets;
+    private enemyBulletControllerAttack1 _control;
 
-    public Transform Shootingpoint;
+    public Transform shootingPoint;
     
-    public GameObject Bullet;
+    public GameObject bullet;
         
     public bool attack1;
     public float fireRateAttack1;
@@ -24,14 +24,13 @@ public class AttackPlayer1 : MonoBehaviour
     public bool attack3;
     public float fireRateAttack3;
     public float nextFireAttack3;
-    private float attack3Axis;
-    private Vector3 randomSpawnLocation;
+    private float _attack3Axis;
+    private Vector3 _randomSpawnLocation;
     
 
-    // Start is called before the first frame update
     void Start()
     {
-        Control = Bullets.GetComponent<enemyBulletControllerAttack1>();
+        _control = bullets.GetComponent<enemyBulletControllerAttack1>();
         fireRateAttack1 = 1f;
         nextFireAttack1 = Time.time;   
         fireRateAttack2 = 0.3f;
@@ -40,35 +39,33 @@ public class AttackPlayer1 : MonoBehaviour
         nextFireAttack3 = Time.time;
         attack1 = false;
         attack2 = false;
-        attack3 = false;
+        attack3 = false;    
     }
     
-
-    // Update is called once per frame
     void Update()
     {   
-        checkIfTimeToFire ();
-        attack3Axis = UnityEngine.Random.Range(-300, 300);
-        randomSpawnLocation = new Vector3(attack3Axis, 7, -300);
+        CheckIfTimeToFire ();
+        _attack3Axis = UnityEngine.Random.Range(-300, 300);
+        _randomSpawnLocation = new Vector3(_attack3Axis, 7, -300);
     }
 
-    void checkIfTimeToFire ()
+    private void CheckIfTimeToFire ()
     {
         if (Time.time > nextFireAttack1 && attack1)
         {
             attack2 = false;
             attack3 = false;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
-            Control.AimX = 100;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
-            Control.AimX = 50;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
-            Control.AimX = -50;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
-            Control.AimX = -100;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
-            Control.AimX = 0;
-            Control.Attack1Active();
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
+            _control.aimX = 100;
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
+            _control.aimX = 50;
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
+            _control.aimX = -50;
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
+            _control.aimX = -100;
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
+            _control.aimX = 0;
+            _control.Attack1Active();
 
             nextFireAttack1 = Time.time + fireRateAttack1;
         }
@@ -76,16 +73,16 @@ public class AttackPlayer1 : MonoBehaviour
         {
             attack1 = false;
             attack3 = false;
-            Instantiate(Bullet, Shootingpoint.position, Quaternion.identity);
+            Instantiate(bullet, shootingPoint.position, Quaternion.identity);
             nextFireAttack2 = Time.time + fireRateAttack2;
-            Control.Attack2Active();
+            _control.Attack2Active();
         }   else if (Time.time > nextFireAttack3 && attack3)
         {
             attack1 = false;
             attack2 = false;
-            Instantiate(Bullet, randomSpawnLocation, Quaternion.identity);
+            Instantiate(bullet, _randomSpawnLocation, Quaternion.identity);
             nextFireAttack3 = Time.time + fireRateAttack3;
-            Control.Attack3Active();
+            _control.Attack3Active();
         }
     }
 }

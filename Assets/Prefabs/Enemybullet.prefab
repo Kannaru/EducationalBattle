@@ -109,14 +109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4fd1ba37445da45ba28249ce31118d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 5172520059792581622, guid: d41c0552921375b4eb16c5842bee9dc6, type: 3}
-  movespeed: 300
-  Movedirection: {x: 0, y: 0, z: 0}
-  MovedirectionOnEnemy: {x: 0, y: 0, z: 0}
-  target2: {fileID: 5172520059792581622, guid: d41c0552921375b4eb16c5842bee9dc6, type: 3}
-  AimX: 0
-  attack1: 1
-  attack2: 0
+  attack: {fileID: 7196144530351382389, guid: d41c0552921375b4eb16c5842bee9dc6, type: 3}
+  moveSpeed: 400
+  moveDirection: {x: 0, y: 0, z: 0}
+  moveDirectionOnEnemy: {x: 0, y: 0, z: 0}
+  target2: {fileID: 7196144530351382389, guid: d41c0552921375b4eb16c5842bee9dc6, type: 3}
+  aimX: 0
+  attack1: 0
+  attack2: 1
   attack3: 0
 --- !u!54 &-2106245439316300269
 Rigidbody:

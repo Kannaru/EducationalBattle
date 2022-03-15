@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6795780530510078240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23, y: -0.026, z: 1.084}
+  m_LocalPosition: {x: 0.23, y: 0.076, z: 1.084}
   m_LocalScale: {x: 0.05882353, y: 0.05882353, z: 0.05882353}
   m_Children: []
   m_Father: {fileID: 6795780532309686091}
@@ -271,11 +271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83f4f583a10c6a46979b1c6ee87d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 450
+  rotationSpeed: 450
   speed: 100
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  controller: {fileID: 0}
-  shooting: {fileID: 0}
+  controller: {fileID: 6795780532309686095}
   dashCooldown: 0
   onGround: 1
 --- !u!114 &6795780532309686094
@@ -291,11 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFire: 0
-  TimebetweenBullets: 0.3
+  timeBetweenBullets: 0
   attackSpeed: 0
-  bulletspeed: 10
   bulletPrefab: {fileID: 8968421159794154945, guid: 9f9329d2af470894c89f7e1888fc16dc, type: 3}
-  Bullet: {fileID: 0}
+  bullet: {fileID: -4216595642961257062, guid: 9f9329d2af470894c89f7e1888fc16dc, type: 3}
   firePoint: {fileID: 6795780530510078241}
 --- !u!143 &6795780532309686095
 CharacterController:

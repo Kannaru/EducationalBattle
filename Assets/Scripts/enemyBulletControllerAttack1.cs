@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class enemyBulletControllerAttack1 : MonoBehaviour
 {   
-     public GameObject Attack;
-    private AttackPlayer1 WhichAttack;
+     public GameObject attack;
+    private AttackPlayer1 _whichAttack;
     
-    public float movespeed = 10;
-    private Rigidbody rb;
-    private Rigidbody rb2;
-    public Vector3 Movedirection;
-    public Vector3 MovedirectionOnEnemy;
-    PlayerController target;
+    public float moveSpeed = 10;
+    private Rigidbody _rb;
+    public Vector3 moveDirection;
+    public Vector3 moveDirectionOnEnemy;
+    PlayerController _target;
     public GameObject target2;
-    public int AimX;
+    public int aimX;
     public bool attack1;
     public bool attack2;
     public bool attack3;
@@ -24,24 +23,21 @@ public class enemyBulletControllerAttack1 : MonoBehaviour
     void Start()
     {
 
-        rb = GetComponent<Rigidbody>();
-        rb2 = GetComponent<Rigidbody>();
-        target = GameObject.FindObjectOfType<PlayerController>();
+        _rb = GetComponent<Rigidbody>();
+        _target = GameObject.FindObjectOfType<PlayerController>();
         target2 = GameObject.FindGameObjectWithTag("Enemy");
-        WhichAttack =Attack.GetComponent<AttackPlayer1>();
+        _whichAttack =attack.GetComponent<AttackPlayer1>();
         
-        if (WhichAttack.attack1)
+        if (_whichAttack.attack1)
         { 
-            Movedirection = (target.transform.position - transform.position).normalized * movespeed;
-            rb.velocity = new Vector3(Movedirection.x + AimX, 0, Movedirection.z);
+            moveDirection = (_target.transform.position - transform.position).normalized * moveSpeed;
+            _rb.velocity = new Vector3(moveDirection.x + aimX, 0, moveDirection.z);
             Destroy(gameObject, 5f);
-        }  if (WhichAttack.attack2)
+        }  if (_whichAttack.attack2)
         {
             transform.position = Vector3.forward;
             Destroy(gameObject, 5f);
         }
-
-   
     }
     
 
@@ -50,8 +46,8 @@ public class enemyBulletControllerAttack1 : MonoBehaviour
         
         if (attack3)
         {
-            rb.velocity = new Vector3(MovedirectionOnEnemy.x, 0, MovedirectionOnEnemy.z);
-            MovedirectionOnEnemy = (target2.transform.position - transform.position).normalized * movespeed;
+            _rb.velocity = new Vector3(moveDirectionOnEnemy.x, 0, moveDirectionOnEnemy.z);
+            moveDirectionOnEnemy = (target2.transform.position - transform.position).normalized * moveSpeed;
             
          }
     }

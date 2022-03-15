@@ -4,35 +4,32 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public bool isFire = false;
-    public float TimebetweenBullets;
+    //behaviour of the bullets
+    public bool isFire;
+    public float timeBetweenBullets;
     public float attackSpeed;
-    public float bulletspeed;
-    
+
+    //bullets
     public GameObject bulletPrefab;
-    public BulletController Bullet;
+    public BulletController bullet;
     public Transform firePoint;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update() {
+        //shoot of left mouse button is held
         if (Input.GetMouseButtonDown(0)) {
            isFire = true;
         }
-
+        
+        //stop shooting if left mouse button is released
         if (Input.GetMouseButtonUp(0)) {
             isFire = false;
         }
         
-        if (isFire) {
+        //fire the bullets only if you are not sprinting
+        if (isFire && Input.GetKeyUp(KeyCode.LeftShift) == false) {
             attackSpeed -= Time.deltaTime;
             if (attackSpeed <= 0) {
-                attackSpeed = TimebetweenBullets;
+                attackSpeed = timeBetweenBullets;
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             }
         }

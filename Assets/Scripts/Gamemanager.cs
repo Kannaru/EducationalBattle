@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class Gamemanager : MonoBehaviour
 {
+    //game status
     public bool gameActive = true;
     public bool bossInGame;
     
+    //prefab to spawn boss
     public GameObject Boss;
 
+    //health for player and enemy
     public int health;
-    public int Bosshealth;
+    public int bosshealth;
     
-    // Start is called before the first frame update
     void Start()
     {
+        //make hp reset each time you restart
         health = 5;
-        Bosshealth = 20;
+        bosshealth = 20;
     }
 
-    // Update is called once per frame
+
     void Update()
+    { 
+        // Spawn in the enemy
+        SpawnBossWhenGameStart();
+    }
+
+    public void SpawnBossWhenGameStart()
     {
-        //Spawn in the enemy
         if (gameActive && bossInGame == false)
         {
             Instantiate(Boss, new Vector3(0,50,200), Quaternion.identity);

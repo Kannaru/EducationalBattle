@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 10000;
-    public float damage = 10f;
+    public float speed = 400;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         Destroy(gameObject, 3f);
     }
@@ -16,6 +16,18 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    { 
+        //maybe fout
+        Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gm.bosshealth -= 1;
+            Destroy(gameObject);
+        }
 
     }
 }
