@@ -15,26 +15,28 @@ public class PlayerController : MonoBehaviour
     public bool gotHit;
 
 
-    void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+    
+    private void Update()
+    {        var gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    
         //Movement with the WASD/arrow keys
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (input != Vector3.zero) {
+        if (input != Vector3.zero && gm.gameActive) {
             targetRotation = Quaternion.LookRotation(input);
             transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,
                 targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
         }
 
-        Vector3 motion = input;
-        motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? speed : speed;
-        motion += Vector3.up * -20;
-        controller.Move(motion * Time.deltaTime);
+        if (gm.gameActive) {
+            Vector3 motion = input;
+            motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? speed : speed;
+            motion += Vector3.up * -20;
+            controller.Move(motion * Time.deltaTime);
+        }
 
         //Dashing with the LeftShift key
         if (Input.GetKeyDown(KeyCode.LeftShift)) {

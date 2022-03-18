@@ -1,107 +1,105 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Gamemanager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     //game status
     public bool gameActive = true;
     public bool bossInGame;
 
     //UI classes before the game
-    public Canvas MainMenu;
-    public Button StartButton;
-
-    //UI classes after the game
-    public Canvas GameOverCanvas;
-    public Button RestartButton;
+    public Canvas mainMenu;
+    public Button startButton;
+    
+    public Canvas gameOverCanvas;
 
     //UI classes for entire game
     public Canvas inGameCanvas;
     public Text healthText;
     public Text bossHealthText;
-    public Text ScoreText;
+    public Text scoreText;
 
 
     //prefab to spawn boss
     public GameObject boss;
 
-    //audiosource
-    public bool playaudio;
+    //audio source
+    public bool playAudio;
     public AudioSource source;
 
     //health for player and enemy
     public int health;
-    public int bosshealth;
+    public int bossHealth;
 
     //floats for the score
     public float score;
-    public float roundedscore;
-    private float _decreaseAmount = 80;
+    public float roundedScore;
+    private const float DecreaseAmount = 80;
 
-    void Start()
+    private void Start()
     {
         //make hp reset each time you restart
         health = 5;
-        bosshealth = 100;
+        bossHealth = 100;
         score = 10000;
         //get source to play the audio
         source = GetComponent<AudioSource>();
-        StartButton.onClick.AddListener(StartGame);
+        startButton.onClick.AddListener(StartGame);
     }
 
 
-    void Update()
+    private void Update()
     {
         DecreaseScore();
-        updateHealths();
+        UpdateHealths();
 
-        if (bosshealth <= 0) {
-            finishgamescreen();
+        //game over statements
+        if (bossHealth <= 0) {
+            FinishGameScreen();
         }
 
         if (health == 0) {
-            finishgamescreen();
+            FinishGameScreen();
         }
     }
 
-    public void StartGame()
+    private void StartGame()
     {
-        MainMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
         Instantiate(boss, new Vector3(0, 30, 200), Quaternion.identity);
         inGameCanvas.gameObject.SetActive(true);
-
         bossInGame = true;
     }
 
-    public void DecreaseScore()
+    private void DecreaseScore()
     {
         if (bossInGame) {
-            score -= _decreaseAmount * Time.deltaTime;
-            roundedscore = Mathf.Round(score);
-            ScoreText.GetComponent<Text>().text = "Score: " + roundedscore;
+            score -= DecreaseAmount * Time.deltaTime;
+            roundedScore = Mathf.Round(score);
+            if (roundedScore < 0) {
+                roundedScore = 0;
+            }
+            scoreText.GetComponent<Text>().text = "Score: " + roundedScore;
+           
         }
     }
 
-    public void updateHealths()
+    private void UpdateHealths()
     {
         healthText.GetComponent<Text>().text = "Your hp: " + health;
-        bossHealthText.GetComponent<Text>().text = "Boss hp: " + bosshealth;
+        bossHealthText.GetComponent<Text>().text = "Boss hp: " + bossHealth;
     }
 
-    public void finishgamescreen()
+    private void FinishGameScreen()
     {
         gameActive = false;
         bossInGame = false;
-        if (bosshealth == 0 && ! playaudio) {
+        if (bossHealth == 0 && ! playAudio) {
             source.Play();
-            playaudio = true;
+            playAudio = true;
         }
-
+        //HUD of game turn off and HUD of game over on
         inGameCanvas.gameObject.SetActive(false);
-        GameOverCanvas.gameObject.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(true);
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
@@ -10,21 +8,21 @@ public class PlayerShoot : MonoBehaviour
     public float attackSpeed;
 
     //bullets
-    private AudioSource source;
+    private AudioSource _source;
     public GameObject bulletPrefab;
     public BulletController bullet;
     public Transform firePoint;
 
 
-    public void Start()
+    private void Start()
     {
-        source = GetComponent<AudioSource>();
+        _source = GetComponent<AudioSource>();
     }
 
-    void Update()
+   private void Update()
     {
-        Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
-        //shoot if spacebar is held
+        var gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //shoot if space bar is held
         if (Input.GetKeyDown(KeyCode.Space) && gm.gameActive) {
             isFire = true;
         }
@@ -35,13 +33,17 @@ public class PlayerShoot : MonoBehaviour
         }
 
         //fire the bullets
-        if (isFire) {
-            attackSpeed -= Time.deltaTime;
-            if (attackSpeed <= 0) {
-                attackSpeed = timeBetweenBullets;
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                source.Play();
-            }
+        if (!isFire) {
+            return;
         }
+
+        attackSpeed -= Time.deltaTime;
+        if (attackSpeed > 0) {
+            return;
+        }
+
+        attackSpeed = timeBetweenBullets;
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        _source.Play();
     }
 }

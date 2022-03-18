@@ -57,9 +57,10 @@
      <Compile Include="Assets\Scripts\MoveBoss.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Gamemanager.cs" />
-     <Compile Include="Assets\Scripts\AttackPlayer1.cs" />
-     <Compile Include="Assets\Scripts\enemyBulletControllerAttack1.cs" />
+     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
+     <Compile Include="Assets\Scripts\EnemyBulletController.cs" />
      <Compile Include="Assets\Scripts\PlayerShoot.cs" />
+     <Compile Include="Assets\Scripts\RestartGame.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
