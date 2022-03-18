@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed = 400;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -16,18 +17,18 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
     }
 
     public void OnCollisionEnter(Collision collision)
-    { 
-        //maybe fout
+    {
+        //lower boss health when getting hit
         Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            gm.bosshealth -= 1;
+        if (collision.gameObject.CompareTag("Enemy")) {
+            if (gm.bosshealth > 0) {
+                gm.bosshealth -= 1;
+            }
+
             Destroy(gameObject);
         }
-
     }
 }

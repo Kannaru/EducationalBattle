@@ -10,27 +10,37 @@ public class PlayerShoot : MonoBehaviour
     public float attackSpeed;
 
     //bullets
+    private AudioSource source;
     public GameObject bulletPrefab;
     public BulletController bullet;
     public Transform firePoint;
-    
-    void Update() {
-        //shoot of left mouse button is held
-        if (Input.GetMouseButtonDown(0)) {
-           isFire = true;
+
+
+    public void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
+        //shoot if spacebar is held
+        if (Input.GetKeyDown(KeyCode.Space) && gm.gameActive) {
+            isFire = true;
         }
-        
+
         //stop shooting if left mouse button is released
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetKeyUp(KeyCode.Space)) {
             isFire = false;
         }
-        
-        //fire the bullets only if you are not sprinting
-        if (isFire && Input.GetKeyUp(KeyCode.LeftShift) == false) {
+
+        //fire the bullets
+        if (isFire) {
             attackSpeed -= Time.deltaTime;
             if (attackSpeed <= 0) {
                 attackSpeed = timeBetweenBullets;
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                source.Play();
             }
         }
     }

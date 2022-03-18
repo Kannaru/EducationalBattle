@@ -7,11 +7,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float rotationSpeed = 450;
-    public float speed;
+    public float speed = 100;
 
     public Quaternion targetRotation;
     public CharacterController controller;
-    
+
+    public bool gotHit;
+
 
     void Start()
     {
@@ -23,8 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         //Movement with the WASD/arrow keys
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (input != Vector3.zero)
-        {
+        if (input != Vector3.zero) {
             targetRotation = Quaternion.LookRotation(input);
             transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,
                 targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
@@ -36,23 +37,12 @@ public class PlayerController : MonoBehaviour
         controller.Move(motion * Time.deltaTime);
 
         //Dashing with the LeftShift key
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
             speed = 200;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
+        if (Input.GetKeyUp(KeyCode.LeftShift)) {
             speed = 100;
-        }
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            Gamemanager gm = GameObject.Find("Gamemanager").GetComponent<Gamemanager>();
-             gm.health -= 1;
         }
     }
 }
