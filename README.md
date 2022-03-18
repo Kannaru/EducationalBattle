@@ -19,10 +19,9 @@ My game had some Backlogs I had to have and implemented into my game:
 
 ## How to play in unity?
 
--download all the files and put them all in one folder
--have the correct version of unity installed and working (I used Unity 2020.3.26f1)
--create a new project
--in your project, click on assets->import assets->custom assets
--click on the folder where all the files are in
--once it's all loaded, press on the scene called "Complete game"
-then play
+- download all the files and put them all in one folder
+- have the correct version of unity installed and working (I used Unity 2020.3.26f1)
+- create a new project
+- in your project, click on assets->import assets->custom assets
+- click on the folder where all the files are in
+- once it's all loaded, press on the scene called "Complete game"
